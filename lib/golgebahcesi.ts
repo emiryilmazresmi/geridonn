@@ -86,8 +86,10 @@ function parseMangaCard(el: Element, $: cheerio.CheerioAPI): Manga {
   const slug = link.replace(BASE_URL, '').replace(/\/manga\//, '').replace(/\//g, '');
   const title = $el.find('.tt, .bigor .tt, h3, .bsx .tt').first().text().trim()
     || $el.find('img').first().attr('alt') || 'Bilinmiyor';
-  const coverRaw = $el.find('img').first().attr('src')
-    || $el.find('img').first().attr('data-src') || '';
+  const coverRaw = $el.find('img.ts-post-image, .bsx img, .limit img').first().attr('data-src')
+    || $el.find('img.ts-post-image, .bsx img, .limit img').first().attr('src')
+    || $el.find('img').first().attr('data-src')
+    || $el.find('img').first().attr('src') || '';
 
   // Recent chapters listed on the card (.adds a, .epxs a)
   const recentChapters: Array<{ number: string; date: string }> = [];
