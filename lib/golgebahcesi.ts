@@ -1,4 +1,5 @@
 import * as cheerio from 'cheerio';
+import type { Element } from 'domhandler';
 import { unstable_cache } from 'next/cache';
 import type { Manga, Chapter, ChapterPages, Tag, Relationship } from './types';
 
@@ -78,7 +79,7 @@ const _fetchChapterPage = (slug: string, chapterSlug: string) =>
 
 // ─── Parsers ─────────────────────────────────────────────────────────────────
 
-function parseMangaCard(el: cheerio.Element, $: cheerio.CheerioAPI): Manga {
+function parseMangaCard(el: Element, $: cheerio.CheerioAPI): Manga {
   // MangaReader theme: .listupd .bs .bsx
   const $el = $(el);
   const link = $el.find('a').first().attr('href') || '';
